@@ -1,0 +1,138 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/"></base>
+	<title> {% block title %} {% endblock %}MiniGames </title>
+	 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/3687b2dab0.js"></script>
+    {% block attach_in_head %}
+    
+    {% endblock %}
+
+    <style type="text/css">
+    .navbar-static-top{
+  background: #6CEAFF !important;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a{
+  background: #5FCFE2 !important;
+}
+
+.navbar-toggle:hover,.navbar-toggle:active,.navbar-toggle:focus{
+  background-color: #5FCFE2 !important;
+}
+    .b_c { 
+      background-image: url("{% static 'img/bg.jpg' %}") ; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+</style>
+   
+</head>
+
+
+<body class="b_c">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <div >
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Mini Games</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        {% block active %}
+          <ul class="nav navbar-nav">
+            <li class="active"><a href=""><i class="fa fa-home" aria-hidden="true"></i>  Home</a></li>
+            <li><a href="/aboutus">About</a></li>
+          </ul>
+        {% endblock %}
+
+          
+          <ul class="nav navbar-nav navbar-right">
+          {% if request.user.is_authenticated %}
+
+          <li><a><i class="fa fa-user" aria-hidden="true"></i>  {{request.user.username}}</a></li>
+          <li><a href="logout/"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a></li>
+
+          {% else %}
+              <li style="vertical-align:middle;">
+              <form class="navbar-form form-inline" action="login/" method="POST">{% csrf_token %}
+              <div class="form-group">
+              <div>
+              <input class="form-control" type="text" name="username" placeholder="Username">
+              </div>
+              </div>
+              <div class="form-group">
+              <div>
+              <input class="form-control" name="password" type="password" placeholder="Passoword">
+              </div>
+              </div>
+              <button class="btn btn-primary"> Login</button>  
+              
+              </form>
+              
+            </li>
+          {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+<div class="container-fluid">
+{% block contents %}
+
+
+{% endblock %} 
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% block script %}
+
+
+{% endblock %} 
+
+
+</body>
+

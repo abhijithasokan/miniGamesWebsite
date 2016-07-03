@@ -1,0 +1,100 @@
+{% extends 'basic.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% block attach_in_head %}
+	<style type="text/css">
+	p{
+		font-family: Comic Sans MS;
+	}
+	.jumbotron p{
+		font-size: 15px;
+	}
+	</style>
+{% endblock %}
+
+{% block contents %}
+<div class="row">
+<div class="col-sm-6 col-xs-12 col-sm-offset-3">
+<div class="jumbotron" style="background-color: rgba(213, 204, 127, 0.31);">
+{% if not user.is_authenticated %}
+{% if message %}
+	<p class="lead"> {{message}}</p>
+{% endif %}
+
+{% if form %}
+<form action="" method="POST" class="form-horizontal"> {% csrf_token %}
+	<div class="form-group">
+		<label class="control-label col-sm-3" for="name"> Username </label>
+		<div class="col-sm-9">
+		<input type="text" name="username" class="form-control" id="name" placeholder="Enter Username">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-sm-3" for="fullname"> Fullname </label>
+		<div class="col-sm-9">
+		<input type="text" name="fullname" class="form-control" id="fullname" placeholder="Enter Fullname">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-sm-3" for="email"> Email </label>
+		<div class="col-sm-9">
+		<input type="email" name="email" class="form-control" id="email" placeholder="Enter your Email">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-sm-3" for="pw1"> Password </label>
+		<div class="col-sm-9">
+		<input type="password" name="password1" class="form-control" id="pw1" placeholder="Enter your Password">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-sm-3" for="pw2"> Confirm </label>
+		<div class="col-sm-9">
+		<input type="password" name="password2" class="form-control" id="pw2" placeholder="Confirm your Password">
+		</div>
+	</div>
+
+	<div class="form-group">
+	<div class="col-sm-9 col-sm-offset-3">
+		<button class="btn btn-success btn-lg btn-block"> Sign Up</button>
+	</div>
+	</div>
+
+</form>
+{% endif %}
+
+
+{% else %}
+<div class="row">
+<h2 style="text-align:center;"> Pick one and start playing </h2>
+</div>
+<div class="row"> 
+	<a href='/snake_game'>
+	<div class="col-sm-6">
+		<div class="jumbotron" style="background-color: rgba(39, 95, 148, 0.4);">
+			<img src="{% static 'img/snake_icon.png' %}" class="img-responsive">
+			<br>
+			<p style="font-size:22px; color: white; text-align:center;"> Snake Game</p>
+		</div>
+		
+	</div>
+	</a>
+	<div class="col-sm-6"  >
+		<div class="jumbotron" style="background-color: rgba(39, 95, 148, 0.4);">
+			<p style="font-size:22px; text-align:center;"> More games coming soon.. </p>
+		</div>
+		
+	</div>
+	
+</div>
+{% endif %}
+
+
+</div>
+</div>
+</div>
+{% endblock %}

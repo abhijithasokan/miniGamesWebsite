@@ -1,0 +1,94 @@
+{% extends 'basic.html' %}
+{% load staticfiles %}
+
+{% block attach_in_head %}
+    <style type="text/css">
+    #game_box{
+	height: 620px;
+	width: 1020px;
+	border: 10px solid brown;
+	margin: 0 auto;
+	background-color: green;
+}</style>
+{% endblock %}
+
+
+
+{% block title %}{{title}}|{% endblock %}
+
+
+
+
+{% block contents %}
+
+	<div class="container">
+	<div class="row" style="background-color:rgba(43, 42, 35, 0.31);">
+	<div class="col-sm-10 col-sm-offset-1" style="text-align:center;" >
+		<h1 style="font-family:Comic Sans MS;"> Snake Game </h1> 
+	</div>
+	</div>
+	</div>
+	
+	<div class="row" style="text-align:center; font-size:30px;">
+	<div class="col-sm-6" id="score">Score: 0</div>
+	<div class="col-sm-6" id="food">Food eaten: 0</div>
+	</div>
+	<div class="row" id="game_box" style="position:relative; background-color:#006700" >
+
+		<div class="row" id="controls" style="text-align:center; font-size:50px; ">
+		<br> <br> <br>
+		<p class="lead" style="color:white;" id="message"> Press this button to start </p>
+		<a onclick="setGame()"> <i class="fa fa-2x fa-play-circle" style="color:yellow;"aria-hidden="true"></i> </a>
+		</div>
+
+	</div>
+
+
+
+
+
+	<br> <br> <br>	<hr>
+	<div class="container">
+	<div class="row">
+	<div class="col-sm-6">
+	<div class="row">
+	<br> <br>
+	<p style="text-align: center; font-size:22px">
+	<i class=""> 
+	<b> <i class="fa fa-trophy" aria-hidden="true"></i> Leader Board</b> <i class="fa fa-trophy" aria-hidden="true"></i> </p>
+	</div>
+	<table class="table table-bordered table-responsive" >
+		<thead><tr class="danger" style="color: blue;"> <th> Rank</th> <th>Username</th> <th> Fullname</th> <th> Score </th></tr> </thead>
+		<tbody id="leaderboard">
+			
+		</tbody>
+		
+	</table>
+	</div>
+	
+	<div class="col-sm-6"> 
+	<div class="fb-like" data-href="{{request.build_absolute_url}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+	<div class="fb-comments" data-href="{{request.build_absolute_url}}" data-numposts="5"></div>
+	</div>
+	</div>
+	</div>
+
+	
+{% endblock %}
+
+
+
+{% block script %}
+
+</script>
+<script type="text/javascript">
+	url = '{% static "snake_game_files/img/" %}';
+	lr = '{{request.get_full_path}}';
+</script>
+
+<script type="text/javascript" src="{% static 'snake_game_files/js/game.js' %}">
+
+</script>
+
+
+{% endblock %}
